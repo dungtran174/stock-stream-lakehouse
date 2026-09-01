@@ -27,7 +27,7 @@ The Stock Stream Lakehouse project simulates a real-time data ingestion and proc
 *(Architecture diagram will be added here)*
 
 ## How to run
-We use `Makefile` to simplify command executions. 
+We use `Makefile` to simplify command executions.
 
 ```bash
 # Start all infrastructure services
