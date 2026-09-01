@@ -1,0 +1,6 @@
+version: '3.8'
+
+networks:
+  lakehouse-network:
+    driver: bridge
+    name: lakehouse-network
