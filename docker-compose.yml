@@ -1,5 +1,28 @@
 version: '3.8'
 
+services:
+  flask-api:
+    build: ./flask
+    container_name: flask-api
+    hostname: flask-api
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./flask/data:/app/data
+    networks:
+      - lakehouse-network
+    restart: unless-stopped
+
+  fake-data-generator:
+    build: ./fake_data
+    container_name: fake-data-generator
+    volumes:
+      - ./flask/data:/flask/data
+    networks:
+      - lakehouse-network
+    profiles:
+      - setup
+
 networks:
   lakehouse-network:
     driver: bridge
