@@ -97,6 +97,38 @@ services:
       - minio_data:/data
     command: [ "server", "/data", "--console-address", ":9001" ]
 
+  mc:
+    image: minio/mc
+    container_name: mc
+    hostname: mc
+    depends_on:
+      - minio
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=us-east-1
+    networks:
+      - lakehouse-network
+    volumes:
+      - ./scripts/init_minio.sh:/tmp/init_minio.sh
+    entrypoint: ["/bin/sh", "/tmp/init_minio.sh"]
+
+  iceberg-rest:
+    image: tabulario/iceberg-rest
+    container_name: iceberg-rest
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=us-east-1
+      - CATALOG_WAREHOUSE=s3://warehouse/
+      - CATALOG_IO__IMPL=org.apache.iceberg.aws.s3.S3FileIO
+      - CATALOG_S3_ENDPOINT=http://minio:9000
+    ports:
+      - "8181:8181"
+    networks:
+      - lakehouse-network
+
+
 networks:
   lakehouse-network:
     driver: bridge
