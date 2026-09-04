@@ -128,6 +128,65 @@ services:
     networks:
       - lakehouse-network
 
+  spark-iceberg:
+    image: tabulario/spark-iceberg:3.5.0_1.4.2
+    hostname: spark-iceberg
+    container_name: spark-iceberg
+    depends_on:
+      - iceberg-rest
+      - minio
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=us-east-1
+      - SPARK_MODE=master
+    ports:
+      - "8888:8888"
+      - "8081:8080"
+      - "7077:7077"
+      - "10000:10000"
+      - "10001:10001"
+    networks:
+      - lakehouse-network
+    volumes:
+      - ./spark/conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf:ro
+      - ./spark/code:/home/iceberg/code
+      - iceberg_warehouse:/home/iceberg/warehouse
+      - iceberg_notebooks:/home/iceberg/notebooks/notebooks
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2G
+
+  spark-worker-1:
+    image: tabulario/spark-iceberg:3.5.0_1.4.2
+    hostname: spark-worker-1
+    container_name: spark-worker-1
+    depends_on:
+      - spark-iceberg
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=us-east-1
+      - SPARK_MODE=worker
+      - SPARK_MASTER_HOST=spark-iceberg
+      - SPARK_MASTER_PORT=7077
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=3G
+      - SPARK_WORKER_WEBUI_PORT=8081
+    ports:
+      - "8082:8081"
+    networks:
+      - lakehouse-network
+    volumes:
+      - ./spark/conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf:ro
+      - iceberg_warehouse:/home/iceberg/warehouse
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 3G
 
 networks:
   lakehouse-network:
@@ -136,3 +195,5 @@ networks:
 
 volumes:
   minio_data:
+  iceberg_warehouse:
+  iceberg_notebooks:
