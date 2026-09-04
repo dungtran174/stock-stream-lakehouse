@@ -188,6 +188,18 @@ services:
           cpus: '2.0'
           memory: 3G
 
+  trino:
+    image: trinodb/trino:457
+    container_name: trino
+    hostname: trino
+    ports:
+      - "8383:8080"
+    networks:
+      - lakehouse-network
+    volumes:
+      - ./trino/etc:/usr/lib/trino/etc:ro
+      - ./trino/catalog:/etc/trino/catalog
+
 networks:
   lakehouse-network:
     driver: bridge
