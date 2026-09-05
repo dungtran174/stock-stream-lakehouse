@@ -1,4 +1,4 @@
-.PHONY: infra-up infra-down clean
+.PHONY: infra-up infra-down superset-init clean
 
 # Infrastructure
 infra-up:
@@ -6,6 +6,10 @@ infra-up:
 
 infra-down:
 	docker-compose down
+
+# Bootstrap Services
+superset-init:
+	bash superset/bootstrap-superset.sh
 
 # Clean up environment
 clean:
