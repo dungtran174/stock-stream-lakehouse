@@ -1,0 +1,4 @@
+apache-airflow-providers-apache-spark==4.11.3
+apache-airflow-providers-trino==5.0.0
+confluent-kafka==2.3.0
+requests>=2.28.0
