@@ -200,6 +200,20 @@ services:
       - ./trino/etc:/usr/lib/trino/etc:ro
       - ./trino/catalog:/etc/trino/catalog
 
+  superset:
+    build: ./superset
+    container_name: superset
+    hostname: superset
+    restart: unless-stopped
+    environment:
+      - SUPERSET_SECRET_KEY=secret
+    ports:
+      - "8088:8088"
+    networks:
+      - lakehouse-network
+    volumes:
+      - superset_data:/app/superset_home
+
 networks:
   lakehouse-network:
     driver: bridge
@@ -209,3 +223,4 @@ volumes:
   minio_data:
   iceberg_warehouse:
   iceberg_notebooks:
+  superset_data:
