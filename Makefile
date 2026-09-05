@@ -1,4 +1,4 @@
-.PHONY: infra-up infra-down superset-init clean
+.PHONY: infra-up infra-down superset-init airflow-init airflow-logs clean
 
 # Infrastructure
 infra-up:
@@ -10,6 +10,12 @@ infra-down:
 # Bootstrap Services
 superset-init:
 	bash superset/bootstrap-superset.sh
+
+airflow-init:
+	docker-compose up -d postgres webserver scheduler
+
+airflow-logs:
+	docker-compose logs -f webserver scheduler
 
 # Clean up environment
 clean:
