@@ -149,12 +149,17 @@ make infra-down
 
 ## Detailed Setup Guides
 
-Modular setup and troubleshooting documentation inspired by enterprise standards:
+Modular setup, operational, and troubleshooting documentation inspired by enterprise standards:
 
 - [**End-to-End Architecture Deep Dive**](setup/architecture.md): Detailed pipeline mechanics and data flow.
 - [**Services, Ports & Credentials**](setup/services.md): Complete port mappings, UI URLs, and default credentials.
+- [**Apache Kafka & Broker Guide**](setup/kafka.md): KRaft cluster architecture, topic schemas, and Kafka UI monitoring.
+- [**Apache Spark & PySpark Guide**](setup/spark.md): Cluster setup, Iceberg REST integration, and streaming/batch jobs.
+- [**Trino Distributed Query Engine**](setup/trino.md): Catalog configuration, ANSI SQL queries, and Iceberg metadata inspection.
+- [**MinIO S3 Storage & Warehouse**](setup/minio.md): S3 object storage setup, bucket provisioning, and directory layout.
 - [**Airflow Orchestration Guide**](setup/airflow.md): Connection setup, DAG graphs, and task dependencies.
-- [**Apache Superset BI Guide**](setup/superset.md): Trino connection URI, SQL Lab queries, and dashboard steps.
+- [**Apache Superset BI Guide**](setup/superset.md): Trino connection URI, SQL Lab queries, and dashboard creation.
+- [**Troubleshooting & Debug Guide**](setup/debug.md): Practical diagnostics for ports, memory limits, and network errors.
 
 ---
 
