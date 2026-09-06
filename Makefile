@@ -1,4 +1,4 @@
-.PHONY: infra-up infra-down superset-init airflow-init airflow-logs clean
+.PHONY: infra-up infra-down superset-init airflow-init airflow-logs status clean
 
 # Infrastructure
 infra-up:
@@ -6,6 +6,9 @@ infra-up:
 
 infra-down:
 	docker-compose down
+
+status:
+	docker-compose ps
 
 # Bootstrap Services
 superset-init:
