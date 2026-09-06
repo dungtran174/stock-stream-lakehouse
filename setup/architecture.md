@@ -1,5 +1,7 @@
 # End-to-End Architecture & Data Pipeline Flow
 
+![Architecture](../pictures/architecture.png)
+
 The Stock Stream Lakehouse implements a modern, cloud-native **Medallion Architecture (Bronze -> Silver -> Gold)** combining real-time stream ingestion and hourly batch ETL.
 
 ---

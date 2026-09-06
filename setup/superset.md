@@ -41,6 +41,8 @@ To connect Superset to the Trino distributed query engine:
    - `Expose in SQL Lab`
 7. Click **Connect** / **Finish**.
 
+![Superset Trino Connection](../pictures/superset_trino_conn.png)
+
 ---
 
 ## 3. Querying Gold Layer Data in SQL Lab
@@ -82,6 +84,8 @@ FROM iceberg.stocks_reporting.daily_order_type_summary;
 ---
 
 ## 4. Building the Dashboard
+
+![Superset Stock Dashboard](../pictures/dashboard.png)
 
 Create datasets from the Gold reporting tables and build visual charts:
 - **Total Volume & Value Timeline:** Line chart tracking total transaction value and volume over dates.

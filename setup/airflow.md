@@ -39,6 +39,8 @@ Enables `SparkSubmitOperator` to deploy PySpark jobs to the Spark Master contain
    - **Port:** `7077`
 3. Click **Save**.
 
+![Spark Connection](../pictures/spark_conn.png)
+
 ### B. Trino Connection (`trino_conn`)
 Enables `TrinoOperator` to execute DDL queries and dimensional aggregations:
 
@@ -52,11 +54,15 @@ Enables `TrinoOperator` to execute DDL queries and dimensional aggregations:
    - **Login:** `admin`
 3. Click **Save**.
 
+![Trino Connection](../pictures/trino_conn.png)
+
 ---
 
 ## 3. DAG Workflows
 
 The repository contains two production DAGs under `airflow/dags/`:
+
+![Airflow DAG Flow](../pictures/airflow_dag.png)
 
 ### A. `stream_dag` (Real-Time Ingestion)
 - **Schedule:** `@daily` (or triggered on-demand).
