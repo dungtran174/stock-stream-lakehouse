@@ -23,21 +23,6 @@ Hệ thống Streaming Data Lakehouse thu thập, xử lý và phân tích giao 
 
 ![System Architecture](pictures/architecture.png)
 
-```text
-[ Data Generator ] ──► [ Flask REST API ] ──► [ Kafka Topic (KRaft) ]
-                                                       │
-                                                       ▼ (PySpark Streaming)
-[ MinIO S3 Storage ] ◄── [ Iceberg REST Catalog ] ◄────┘
-         │
-         ├─► Bronze Layer: iceberg.stocks.transactions (Raw Parquet)
-         │        │
-         │        ▼ (PySpark Cleansing & Deduplication)
-         ├─► Silver Layer: iceberg.stocks.transactions_cleaned
-         │        │
-         │        ▼ (Trino SQL Aggregation)
-         └─► Gold Layer: iceberg.stocks_reporting (Data Mart) ──► [ Apache Superset Dashboard ]
-```
-
 - **Broker:** Apache Kafka (KRaft mode).
 - **Storage & Table Format:** MinIO (S3-compatible) + Apache Iceberg (REST Catalog).
 - **Processing:** PySpark (Structured Streaming + Batch).
